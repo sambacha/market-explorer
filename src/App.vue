@@ -4,10 +4,17 @@
       <Header>
         <Menu mode="horizontal" theme="dark">
           <div class="layout-logo">
-            <img src="./assets/logo_terminal_assets.svg" alt="">
+            <img src="./assets/logo_terminal_assets.svg" alt="" />
           </div>
           <div class="layout-nav">
-            <Button v-if="!isAuthed" icon="md-unlock" :to="{ name: 'Settings' }" type="error" ghost>Authenticate</Button>
+            <Button
+              v-if="!isAuthed"
+              icon="md-unlock"
+              :to="{ name: 'Settings' }"
+              type="error"
+              ghost
+              >Authenticate</Button
+            >
             <div v-else class="websocket-status">
               <Badge v-if="wsActive" status="processing" text="Connected" />
               <Badge v-else status="error" text="Disconnected" />
@@ -16,7 +23,7 @@
         </Menu>
       </Header>
       <Layout>
-        <Sider hide-trigger :style="{background: '#fff'}">
+        <Sider hide-trigger :style="{ background: '#fff' }">
           <Menu :active-name="activePage" width="auto">
             <MenuItem name="1-1" :to="{ name: 'Home' }">
               <Icon type="ios-compass" />
@@ -58,12 +65,14 @@
 
           <div class="poweredby-wrap">
             <a href="https://amberdata.io" target="_blank">
-              <img src="./assets/amberdata_powered_logo.svg" alt="">
+              <img src="./assets/amberdata_powered_logo.svg" alt="" />
             </a>
           </div>
         </Sider>
-        <Layout :style="{padding: '0 24px 24px'}">
-          <Content :style="{padding: '24px', minHeight: 'calc(100vh - 90px)'}">
+        <Layout :style="{ padding: '0 24px 24px' }">
+          <Content
+            :style="{ padding: '24px', minHeight: 'calc(100vh - 90px)' }"
+          >
             <router-view />
           </Content>
         </Layout>
@@ -73,69 +82,69 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
 
   data() {
     return {
-      activePage: '1-1',
-    }
+      activePage: "1-1"
+    };
   },
 
   computed: {
-    ...mapGetters(['apiKey', 'wsActive', 'authenticated']),
+    ...mapGetters(["apiKey", "wsActive", "authenticated"]),
     isAuthed() {
-      return this.authenticated
-    },
+      return this.authenticated;
+    }
   },
 
   methods: {
-    ...mapActions(['loadApiKeyFromCache'])
+    ...mapActions(["loadApiKeyFromCache"])
   },
 
   mounted() {
-    this.loadApiKeyFromCache()
+    this.loadApiKeyFromCache();
 
     // Set the current selected menu link based on current route
-    const name = this.$route.name
+    const name = this.$route.name;
     switch (name) {
-      case 'Home':
-        this.activePage = '1-1'
+      case "Home":
+        this.activePage = "1-1";
         break;
-      case 'Assets':
-        this.activePage = '2-1'
+      case "Assets":
+        this.activePage = "2-1";
         break;
-      case 'Arbitrage':
-        this.activePage = '3-1'
+      case "Arbitrage":
+        this.activePage = "3-1";
         break;
-      case 'Blockchain':
-        this.activePage = '4-1'
+      case "Blockchain":
+        this.activePage = "4-1";
         break;
-      case 'Market Depth':
-        this.activePage = '5-1'
+      case "Market Depth":
+        this.activePage = "5-1";
         break;
-      case 'OHLCV':
-        this.activePage = '6-1'
+      case "OHLCV":
+        this.activePage = "6-1";
         break;
-      case 'Summary':
-        this.activePage = '7-1'
+      case "Summary":
+        this.activePage = "7-1";
         break;
-      case 'PriceComparison':
-        this.activePage = '8-1'
+      case "PriceComparison":
+        this.activePage = "8-1";
         break;
-      case 'TransactionInspector':
-        this.activePage = '9-1'
+      case "TransactionInspector":
+        this.activePage = "9-1";
         break;
-      case 'Settings':
-        this.activePage = '10-1'
+      case "Settings":
+        this.activePage = "10-1";
         break;
       default:
-        this.activePage = '1-1'
+        this.activePage = "1-1";
     }
   }
-}
+};
 </script>
 
 <style scoped>
